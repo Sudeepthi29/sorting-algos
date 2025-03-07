@@ -1,0 +1,66 @@
+public static int[] Mergesort(int[] arr)
+{
+    Merge(arr, 0, arr.Length - 1);
+    return arr;
+}
+public static void Merge(int[] arr, int low, int high)
+{
+    if(low >= high)
+    {
+        return;
+    }
+
+    int middle = low + ((high - low) / 2);
+    Merge(arr, low, middle);
+    Merge(arr, middle+1, high);
+
+    MergeArrays(arr, low, middle, high);
+
+}
+
+public static void MergeArrays(int[] arr, int low, int middle, int high)
+{
+    int A1Length = middle - low + 1;
+    int A2Length = high - middle;
+
+    int[] A1 = new int[A1Length];
+    int[] A2 = new int[A2Length];
+
+    int i;
+    for( i = 0; i < A1Length; i++)
+    {
+        A1[i] = arr[low + i];
+    }
+    for(i = 0; i < A2Length; i++)
+    {
+        A2[i] = arr[middle + i + 1];
+    }
+
+    i = 0;
+    int j = 0, k = low;
+    while(i < A1Length && j < A2Length)
+    {
+        if (A2[j] < A1[i])
+        {
+            arr[k] = A2[j];
+            j++;
+        }
+        else
+        {
+            arr[k] = A1[i];
+            i++;
+        }
+        k++;
+    }
+
+    while (i < A1Length)
+    {
+        arr[k++] = A1[i++];
+    }
+
+    while (j < A2Length)
+    {
+        arr[k++] = A2[j++];
+    }
+}
+
