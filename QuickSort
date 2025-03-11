@@ -1,0 +1,35 @@
+public static void swap(int[] arr, int a,int b){
+            int t = arr[a];
+            arr[a] = arr[b];
+            arr[b] = t;
+}
+
+public static int FindPivotIndex(int[] arr, int l, int r)
+{
+    int pivotIndex = r;
+
+    int i = l - 1, j = l;
+    for (; j < r; j++)
+    {
+        if (arr[j] <= arr[r])
+        {
+            swap(arr, ++i, j);
+        }
+    }
+    pivotIndex = i + 1;
+    swap(arr, pivotIndex, r);
+    return pivotIndex;
+}
+
+public static int[] QuickSort(int[] arr, int l, int r)
+{
+    if (l<r)
+    {
+        int pivotIndex = FindPivotIndex(arr, l, r);
+
+        QuickSort(arr, l, pivotIndex - 1);
+        QuickSort(arr, pivotIndex+1, r);   
+    }
+
+    return arr;
+}
